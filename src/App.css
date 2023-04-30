@@ -17,3 +17,15 @@ body {
   margin: 0px auto;
   margin-top: 20px;
 }
+
+.post_inputs_container {
+  margin-top: 20px;
+}
+
+.post_input_container {
+  margin-bottom: 20px;
+}
+
+.post_input_button {
+  float: right;
+}

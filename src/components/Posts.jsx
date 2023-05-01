@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import api from "../shared/mock_api";
 import _ from "lodash";
 import { PostSnippet } from "./PostSnippet";
 import db from "../../firebase";
@@ -39,7 +38,7 @@ function Posts(props) {
             <PostSnippet
               key={id}
               id={article.id}
-              title={article.title}
+              title={_.capitalize(article.title)}
               message={article.content
                 .substring(0, 1000)
                 .concat(article.content.length > 1000 ? "..." : "")}

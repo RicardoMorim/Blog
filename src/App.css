@@ -29,3 +29,12 @@ body {
 .post_input_button {
   float: right;
 }
+
+.app_main_navigation {
+  margin-bottom: 20px;
+}
+
+.nav_item {
+  font-size: large;
+  float: right;
+}

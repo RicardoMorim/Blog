@@ -11,17 +11,18 @@ export const PostSnippet = (props) => {
         type="inner"
         title={props.title}
         extra={
-        <Link to={`/post/${props.id}/`}>
-           Read Full Article 
-        </Link>
-      }
+          <div className="post_snippet_links">
+            <Link to={`/post/${props.id}/`} style={{ marginRight: "15px" }}>
+              Read Full Article
+            </Link>
+            <Link to={`/update_post/${props.id}/`}>Edit</Link>
+          </div>
+        }
       >
         <p className="artile_content">
-          {
-            props.message.split("\n").map((item, i) => {
-              return <p key={i}> {item} </p>;
-            })
-          }
+          {props.message.split("\n").map((item, i) => {
+            return <p key={i}> {item} </p>;
+          })}
         </p>
       </Card>
     </div>

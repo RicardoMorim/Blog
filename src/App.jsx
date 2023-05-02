@@ -50,11 +50,14 @@ function App(props) {
               <ReadOutlined /> Posts
             </Link>
           </Menu.Item>
-          <Menu.Item key="create_post">
-            <Link to="/create_post">
-              <HighlightOutlined /> Create Post
-            </Link>
-          </Menu.Item>
+
+          {user && (
+            <Menu.Item key="create_post">
+              <Link to="/create_post">
+                <HighlightOutlined /> Create Post
+              </Link>
+            </Menu.Item>
+          )}
 
           {user ? (
             <SubMenu

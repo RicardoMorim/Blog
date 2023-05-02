@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "antd";
-import api from "../shared/mock_api";
 import db from "../../firebase";
 
 const Post = (props) => {
@@ -10,15 +9,16 @@ const Post = (props) => {
   useEffect(() => {
     let postRef = db.collection("posts").doc(props.id);
 
-    postRef.get().then((doc) => {
-      let { title, content } = doc.data();
-      setTitle(title);
-      setContent(content);
-    })
-    .catch((error) => {
-      console.error(`There was an error fetching the post: ${error}`)
-    })
-
+    postRef
+      .get()
+      .then((doc) => {
+        let { title, content } = doc.data();
+        setTitle(title);
+        setContent(content);
+      })
+      .catch((error) => {
+        console.error(`There was an error fetching the post: ${error}`);
+      });
   }, []);
 
   return (
@@ -38,4 +38,3 @@ const Post = (props) => {
 };
 
 export default Post;
-

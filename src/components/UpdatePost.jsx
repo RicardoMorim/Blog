@@ -9,7 +9,11 @@ const UpdatePost = (props) => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    let postRef = db.collection("posts").doc(props.id);
+    let postRef = db
+      .collection("users")
+      .doc(props.user.uid)
+      .collection("posts")
+      .doc(props.id);
 
     postRef
       .get()
@@ -28,20 +32,26 @@ const UpdatePost = (props) => {
 
   const onEditPost = () => {
     let payload = { title, content };
-    let postRef = db.collection("posts").doc(props.id);
+    let postRef = db
+      .collection("users")
+      .doc(props.user.uid)
+      .collection("posts")
+      .doc(props.id);
 
     postRef
       .update(payload)
       .then((docRef) => {
-        console.log(`Post Updated successfully! Id: ${docRef.id}. New Values: `, {
-          title,
-          content,
-        });
+        console.log(
+          `Post Updated successfully! Id: ${docRef.id}. New Values: `,
+          {
+            title,
+            content,
+          }
+        );
       })
       .catch((error) => {
         console.error(`There was an error posting the post: ${error}`);
       });
-
 
     navigate(`/posts`);
   };
@@ -49,7 +59,7 @@ const UpdatePost = (props) => {
   return (
     <div className="create_post_container">
       <div className="page_header_container">
-        <h1 className="posts_title"> Create Post </h1>
+        <h1 className="posts_title"> Update Post </h1>
       </div>
 
       <div className="post_inputs_container">
@@ -95,4 +105,3 @@ const UpdatePost = (props) => {
 };
 
 export default UpdatePost;
-

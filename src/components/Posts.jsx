@@ -7,21 +7,25 @@ function Posts(props) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let postRef = db.collection("posts");
-    postRef.get().then((posts) => {
-      posts.forEach((post) => {
+    let userId = props?.user.uid ? props?.user.uid : props.uid;
+
+    if (userId != props.uid) user = props.uid;
+
+    let postRef = db.collection("users").doc(userId).collection("posts");
+
+    postRef.onSnapshot(async (posts) => {
+      let postsData = await posts.docs.map((post) => {
         let data = post.data();
-        let id = post.id;
+        let { id } = post;
 
         let payload = {
           id,
           ...data,
         };
 
-        setPosts((posts) => {
-          return [...posts, payload];
-        });
+        return payload;
       });
+      setPosts(postsData);
     });
   }, []);
 
@@ -42,6 +46,8 @@ function Posts(props) {
               message={article.content
                 .substring(0, 1000)
                 .concat(article.content.length > 1000 ? "..." : "")}
+              user={props.user}
+              uid={props.uid}
             />
           );
         })}

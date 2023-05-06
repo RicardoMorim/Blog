@@ -7,7 +7,11 @@ const Post = (props) => {
   var [content, setContent] = useState("");
 
   useEffect(() => {
-    let postRef = db.collection("posts").doc(props.id);
+    let postRef = db
+      .collection("users")
+      .doc(props.uid)
+      .collection("posts")
+      .doc(props.id);
 
     postRef
       .get()

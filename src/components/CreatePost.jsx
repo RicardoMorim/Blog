@@ -7,13 +7,14 @@ import { navigate } from "@reach/router";
 const CreatePost = (props) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
   const onTitleChange = (event) => setTitle(event.target.value);
   const onContentChange = (event) => setContent(event.target.value);
-
   const onCreatePost = () => {
     let payload = { title, content };
-    let postRef = db.collection("posts");
+    let postRef = db
+      .collection("users")
+      .doc(props.user.uid)
+      .collection("posts");
 
     postRef
       .add(payload)

@@ -28,10 +28,24 @@ const CreatePost = (props) => {
         console.error(`There was an error posting the post: ${error}`);
       });
 
+    postRef = db.collection("posts");
+
+    postRef
+      .add(payload)
+      .then((docRef) => {
+        console.log(`Post sent successfully! Id: ${docRef.id}`, {
+          title,
+          content,
+        });
+      })
+      .catch((error) => {
+        console.error(`There was an error posting the post: ${error}`);
+      });
+
     setTitle("");
     setContent("");
 
-    navigate(`/posts`);
+    navigate(`/blogs/${props.user.uid}/posts`);
   };
 
   return (

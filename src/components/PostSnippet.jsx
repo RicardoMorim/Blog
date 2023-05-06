@@ -20,6 +20,17 @@ export const PostSnippet = (props) => {
       .catch((error) => {
         console.log("There was the folowing error: " + error.message);
       });
+
+    postRef = db.collection("posts").doc(props.id);
+
+    postRef
+      .delete()
+      .then(() => {
+        console.log("Post deleted!");
+      })
+      .catch((error) => {
+        console.log("There was the folowing error: " + error.message);
+      });
   };
 
   return (
@@ -30,12 +41,24 @@ export const PostSnippet = (props) => {
         title={props.title}
         extra={
           <div className="post_snippet_links">
-            <Link
-              to={`/blogs/${props.uid}/post/${props.id}`}
-              style={{ marginRight: "15px", float: "left" }}
-            >
-              Read Full Article
-            </Link>
+            {props.feed && (
+              <Link
+                to={`/blogs/feed/post/${props.id}`}
+                style={{ marginRight: "15px", float: "left" }}
+              >
+                Read Full Article
+              </Link>
+            )}
+            
+            {!props.feed && (
+              <Link
+                to={`/blogs/${props.uid}/post/${props.id}`}
+                style={{ marginRight: "15px", float: "left" }}
+              >
+                Read Full Article
+              </Link>
+            )}
+
             {props.user && (
               <div className="post_edit_links" style={{ float: "right" }}>
                 <Link

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Posts from "./components/Posts";
-import { Router, Link } from "@reach/router";
+import { Router, Link, redirectTo } from "@reach/router";
 import Post from "./components/Post";
 import CreatePost from "./components/CreatePost";
 import UpdatePost from "./components/UpdatePost";
@@ -9,6 +9,9 @@ import SignIn from "./components/SignIn";
 import { auth } from "../firebase";
 import "./App.css";
 import NavApp from "./components/AppNav";
+import { navigate } from "@reach/router";
+import Feed from "./components/Feed";
+import FeedPost from "./components/FeedPost";
 
 function App(props) {
   const [count, setCount] = useState(0);
@@ -41,8 +44,10 @@ function App(props) {
       <NavApp user={user} onSignOut={onSignOut} />
 
       <Router>
-        <SignIn path="sign_in" default />
+        <SignIn user={user} path="sign_in" default />
         <SignUp path="sign_up" />
+        <Feed path="blogs" />
+        <FeedPost path="/blogs/feed/post/:id" />
         <Posts user={user} path="blogs/:uid/posts" />
         <CreatePost user={user} path="create_post" />
         <Post user={user} path="blogs/:uid/post/:id" />

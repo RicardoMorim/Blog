@@ -3,15 +3,11 @@ import _ from "lodash";
 import { PostSnippet } from "./PostSnippet";
 import db from "../../firebase";
 
-function Posts(props) {
+const Feed = (props) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let userId = props?.user.uid ? props?.user.uid : props.uid;
-
-    if (userId != props.uid) user = props.uid;
-
-    let postRef = db.collection("users").doc(userId).collection("posts");
+    let postRef = db.collection("posts");
 
     postRef.onSnapshot(async (posts) => {
       let postsData = await posts.docs.map((post) => {
@@ -32,7 +28,7 @@ function Posts(props) {
   return (
     <div className="posts_container">
       <div className="page_header_container">
-        <h1 className="posts_title"> Posts </h1>
+        <h1 className="posts_title"> Feed </h1>
       </div>
 
       <div className="articles_container">
@@ -48,13 +44,13 @@ function Posts(props) {
                 .concat(article.content.length > 1000 ? "..." : "")}
               user={props.user}
               uid={props.uid}
-              feed={false}
+              feed={true}
             />
           );
         })}
       </div>
     </div>
   );
-}
+};
 
-export default Posts;
+export default Feed;

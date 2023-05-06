@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
 import { auth } from "../../firebase";
+import { redirectTo } from "@reach/router";
+import { navigate } from "@reach/router";
 
 const SignIn = (props) => {
   const [email, setEmail] = useState("");
@@ -10,13 +12,17 @@ const SignIn = (props) => {
   const onPasswordChange = (event) => setPassword(event.target.value);
 
   const onSignIn = () => {
+    let a = "";
     auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log("Signed in!");
+      .then((userCredentionals) => {
+        a = userCredentionals.user.uid;
+        console.log("Signed in! ID: " + a);
+        navigate(`/blogs/${a}/posts`);
       })
       .catch((error) => {
-        console.error("There was an error: " + error.message);
+        console.error("There was an error: " + error.code, error.message);
+        alert("There was an error: " + error.code, error.message);
       });
 
     setEmail("");

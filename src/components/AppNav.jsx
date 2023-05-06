@@ -1,6 +1,10 @@
 import React from "react";
 import { Button, Menu } from "antd";
-import { HighlightOutlined, ReadOutlined } from "@ant-design/icons";
+import {
+  HighlightOutlined,
+  ReadOutlined,
+  LikeOutlined,
+} from "@ant-design/icons";
 let { SubMenu } = Menu;
 import { Link } from "@reach/router";
 
@@ -19,6 +23,12 @@ const AppNav = (props) => {
             </Link>
           </Menu.Item>
         )}
+
+        <Menu.Item key="feed">
+          <Link to="/blogs">
+            <LikeOutlined /> Feed
+          </Link>
+        </Menu.Item>
 
         {user && (
           <Menu.Item key="create_post">

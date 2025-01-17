@@ -9,7 +9,7 @@ A Simple Blog made with React and Firebase.
 ->Every blog is kept in firebase cloud service so everything is fast and simple for the user.
 
 **Real-Time:**
-->The blog is apdated in real time!
+->The blog is updated in real time!
 
 #Deployment
 **URL:**
